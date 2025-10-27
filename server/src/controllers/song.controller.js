@@ -59,10 +59,10 @@ export const getMadeForYouSongs = async (req, res, next) => {
 
 export const getTrendingSongs = async (req, res, next) => {
 	try {
-		// fetch 6 random songs  using mongodb's aggregation pipeline
+		// fetch 4 random songs  using mongodb's aggregation pipeline
 		const songs = await Song.aggregate([
 			{
-				$sample: { size: 6 },
+				$sample: { size: 4 },
 			},
 			{
 				$project: {

@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/hooks/use-auth-store'
 import { axiosInstance } from '@/lib/axios'
 import { useAuth } from '@clerk/clerk-react'
 import { Loader } from 'lucide-react'
@@ -14,12 +15,16 @@ const updateApiToken = (token: string | null) => {
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const { getToken } = useAuth()
 	const [loading, setLoading] = useState(true)
+	const { checkAdminStatus } = useAuthStore()
 
 	useEffect(() => {
 		const initAuth = async () => {
 			try {
 				const token = await getToken()
 				updateApiToken(token)
+				if (token) {
+					await checkAdminStatus()
+				}
 			} catch (error) {
 				updateApiToken(null)
 				console.log('Error in auth provider', error)
@@ -28,7 +33,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			}
 		}
 		initAuth()
-	}, [getToken])
+	}, [getToken, checkAdminStatus])
 
 	if (loading)
 		return (
