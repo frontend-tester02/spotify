@@ -1,3 +1,4 @@
+import PlayButton from '@/components/shared/play-button'
 import FeaturedGridSkeleton from '@/components/skeletons/featured-skeleton'
 import { useMusicStore } from '@/hooks/use-music-store'
 
@@ -24,6 +25,8 @@ const FeaturedMusic = () => {
 						<p className='font-medium truncate'>{song.title}</p>
 						<p className='text-sm text-zinc-400 truncate'>{song.artist}</p>
 					</div>
+
+					<PlayButton song={song} />
 				</div>
 			))}
 		</div>
