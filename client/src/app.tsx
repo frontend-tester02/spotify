@@ -8,6 +8,7 @@ import AlbumPage from './pages/album/page'
 import AdminPage from './pages/admin/page'
 
 import { Toaster } from 'react-hot-toast'
+import NotFound from './components/shared/not-found'
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 					<Route path='/' element={<HomePage />} />
 					<Route path='/chat' element={<ChatPage />} />
 					<Route path='/albums/:albumId' element={<AlbumPage />} />
+					<Route path='/*' element={<NotFound />} />
 				</Route>
 			</Routes>
 			<Toaster position='top-center' />
