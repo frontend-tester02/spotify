@@ -35,7 +35,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
 	users: [],
 	isLoading: false,
 	error: null,
-	socket: null,
+	socket: socket,
 	isConnected: false,
 	onlineUsers: new Set(),
 	userActivities: new Map(),
@@ -112,11 +112,12 @@ export const useChatStore = create<ChatStore>((set, get) => ({
 			set({ isConnected: false })
 		}
 	},
-	sendMessage: (receiverId, senderId, connect) => {
+
+	sendMessage: async (receiverId, senderId, content) => {
 		const socket = get().socket
 		if (!socket) return
 
-		socket.emit('send_message', { receiverId, senderId, connect })
+		socket.emit('send_message', { receiverId, senderId, content })
 	},
 	fetchMessages: async (userId: string) => {
 		set({ isLoading: true, error: null })
