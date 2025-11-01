@@ -22,6 +22,7 @@ const SignInBtn = () => {
 			className='w-full text-white h-11 border-zinc-200'
 			onClick={signInWithGoogle}
 		>
+			<img src='/google.png' alt='Google' className='size-5' />
 			Continue with Google
 		</Button>
 	)
