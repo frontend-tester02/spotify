@@ -28,10 +28,7 @@ initializeSocket(httpServer)
 
 app.use(
 	cors({
-		origin:
-			process.env.NODE_ENV === 'production'
-				? 'https://spotify.shoky.dev/'
-				: 'http://localhost:3000',
+		origin: 'http://localhost:3000',
 		credentials: true,
 	})
 )
