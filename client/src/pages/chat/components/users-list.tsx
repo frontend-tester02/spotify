@@ -4,7 +4,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { useChatStore } from '@/hooks/use-chat-store'
 
 const UsersList = () => {
-	const { users, isLoading, selectedUser, setSelectedUser, onlineUsers } =
+	const { users, selectedUser, isLoading, setSelectedUser, onlineUsers } =
 		useChatStore()
 
 	return (
@@ -20,7 +20,8 @@ const UsersList = () => {
 									key={user._id}
 									onClick={() => setSelectedUser(user)}
 									className={`flex items-center justify-center lg:justify-start gap-3 p-3 
-										rounded-lg cursor-pointer transition-colors ${
+										rounded-lg cursor-pointer transition-colors
+                    ${
 											selectedUser?.clerkId === user.clerkId
 												? 'bg-zinc-800'
 												: 'hover:bg-zinc-800/50'
@@ -33,11 +34,12 @@ const UsersList = () => {
 										</Avatar>
 										{/* online indicator */}
 										<div
-											className={`absolute bottom-0 right-0 h-3 w-3 rounded-full ring-2 ring-zinc-900 ${
-												onlineUsers.has(user.clerkId)
-													? 'bg-green-500'
-													: 'bg-zinc-500'
-											}`}
+											className={`absolute bottom-0 right-0 h-3 w-3 rounded-full ring-2 ring-zinc-900
+                        ${
+													onlineUsers.has(user.clerkId)
+														? 'bg-green-500'
+														: 'bg-zinc-500'
+												}`}
 										/>
 									</div>
 

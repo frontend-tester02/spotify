@@ -1,27 +1,27 @@
-import TopBar from '@/components/shared/top-bar'
-import { useChatStore } from '@/hooks/use-chat-store'
 import { useUser } from '@clerk/clerk-react'
 import { useEffect } from 'react'
-import UsersList from './components/users-list'
-import ChatHeader from './components/chat-header'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
-import MessageInput from './components/message-input'
+import { useChatStore } from '@/hooks/use-chat-store'
+import TopBar from '@/components/shared/top-bar'
+import UsersList from './components/users-list'
+import ChatHeader from './components/chat-header'
 import { formatChatTime } from '@/lib/utils'
+import MessageInput from './components/message-input'
 
 const ChatPage = () => {
 	const { user } = useUser()
-	const { fetchMessages, fetchUsers, selectedUser, messages } = useChatStore()
+	const { messages, selectedUser, fetchUsers, fetchMessages } = useChatStore()
 
 	useEffect(() => {
-		if (user) {
-			fetchUsers()
-		}
+		if (user) fetchUsers()
 	}, [fetchUsers, user])
 
 	useEffect(() => {
 		if (selectedUser) fetchMessages(selectedUser.clerkId)
-	}, [fetchMessages, selectedUser])
+	}, [selectedUser, fetchMessages])
+
+	console.log({ messages })
 
 	return (
 		<main className='h-full rounded-lg bg-linear-to-b from-zinc-800 to-zinc-900 overflow-hidden'>
@@ -36,8 +36,7 @@ const ChatPage = () => {
 						<>
 							<ChatHeader />
 
-							{/* Messagesa */}
-
+							{/* Messages */}
 							<ScrollArea className='h-[calc(100vh-340px)]'>
 								<div className='p-4 space-y-4'>
 									{messages.map(message => (
@@ -82,7 +81,6 @@ const ChatPage = () => {
 		</main>
 	)
 }
-
 export default ChatPage
 
 const NoConversationPlaceholder = () => (
