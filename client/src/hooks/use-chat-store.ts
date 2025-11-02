@@ -24,7 +24,7 @@ interface ChatStore {
 }
 
 const baseURL =
-	import.meta.env.MODE === 'development' ? 'http://localhost:8080' : '/'
+	import.meta.env.MODE === 'development' ? 'http://localhost:8080/api' : '/'
 
 const socket = io(baseURL, {
 	autoConnect: false, // only connect if user is authenticated
